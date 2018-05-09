@@ -9,11 +9,11 @@ public class DataConverter {
 	public DataConverter() {
 		try {
 			FileWriter outputWriter = new FileWriter(
-					"/Users/Jason/Downloads/output.dat");
+					"output.dat");
 			int txcount = 0;
 
 			BufferedReader csvReader = new BufferedReader(new FileReader(
-					"/Users/Jason/Downloads/rawdata.csv"));
+					"marketbasket.csv"));
 
 			// read the first line in but do nothing with it.
 			String thisLine = csvReader.readLine();

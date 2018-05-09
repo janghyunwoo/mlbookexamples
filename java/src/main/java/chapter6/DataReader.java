@@ -18,13 +18,7 @@ import org.apache.mahout.common.Pair;
 import org.apache.mahout.fpm.pfpgrowth.convertors.string.TopKStringPatterns;
 
 public class DataReader {
-	static {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+
 	
 	public static Map<Integer, Long> readFrequencyFile(Configuration configuration, String fileName) throws Exception {
 		FileSystem fs = FileSystem.get(configuration);
@@ -42,7 +36,7 @@ public class DataReader {
 	public static Map<Integer, String> loadItems() {
 		Map<Integer, String> products = new HashMap<Integer, String>();
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/apriori","root","");
+			Connection con = DBManager.oldConnect();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM products");
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -58,8 +52,8 @@ public class DataReader {
 	}
 	
 	public static void processResults(Configuration configuration, Map<Integer, String> products) throws Exception {
-		String frequencyfilename = "";
-		String frequencypatternsfilename = "";
+		String frequencyfilename = "output.dat";
+		String frequencypatternsfilename = "output.dat";
 		double userMinimumSupport = 3;
 		double userMinimumConfidence = 3;
 		int transactioncount = 1361;

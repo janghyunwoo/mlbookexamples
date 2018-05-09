@@ -13,19 +13,20 @@ public class MLPProcessor {
 
 	public MLPProcessor() {
 		try {
-			FileReader fr = new FileReader("/Users/Jason/work/data/vehicledata.arff");
-			
+			//신경망에 데이터 input해서 training
+			FileReader fr = new FileReader("./vehicledata.arff");
 			Instances training = new Instances(fr);
-			
 			training.setClassIndex(training.numAttributes() -1);
 			
 			MultilayerPerceptron mlp = new MultilayerPerceptron();
-			mlp.setOptions(Utils.splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H 4")); 
-
+			mlp.setOptions(Utils.splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H a -G -R")); 
+//			mlp.setOptions(Utils.splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H 4")); 
 
 			mlp.buildClassifier(training); 
 
-			FileReader tr = new FileReader("/Users/Jason/work/data/testdata.arff");
+			////////////
+			//트레이닝 후 테스트 데이터 input해서 결과 받기
+			FileReader tr = new FileReader("./testdata.arff");
 			Instances testdata = new Instances(tr);
 			testdata.setClassIndex(testdata.numAttributes() -1);
 			

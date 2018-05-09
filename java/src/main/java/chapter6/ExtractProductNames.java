@@ -21,10 +21,10 @@ public class ExtractProductNames {
 	
 	public ExtractProductNames() {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/apriori","root","");
+			Connection con = DBManager.oldConnect();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO products (id, productname) VALUES (?,?)");
 			
-			BufferedReader csvfile = new BufferedReader(new FileReader("/Users/Jason/Downloads/rawdata.csv"));
+			BufferedReader csvfile = new BufferedReader(new FileReader("marketbasket.csv"));
 			String productsLine = csvfile.readLine();
 			String[] products = productsLine.split(",");
 
@@ -35,6 +35,7 @@ public class ExtractProductNames {
 				pstmt.execute();
 				System.out.println("Added: " + products[i] + " into db");
 			}
+			
 			pstmt.close();
 			con.close();
 		} catch (FileNotFoundException e) {
@@ -42,6 +43,9 @@ public class ExtractProductNames {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

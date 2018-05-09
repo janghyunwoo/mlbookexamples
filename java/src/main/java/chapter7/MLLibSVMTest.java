@@ -21,7 +21,7 @@ public class MLLibSVMTest {
 			svm.setOptions(options);
 	        svm.buildClassifier(data);
 	        
-	       showInstanceClassifications(svm, data);
+	       //showInstanceClassifications(svm, data);
 			
 	        
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class MLLibSVMTest {
  	}
 	
 	public static void main(String[] args) {
-		MLLibSVMTest mllsvm = new MLLibSVMTest("/Users/Jason/work/data/v100k.arff");
+		MLLibSVMTest mllsvm = new MLLibSVMTest("vehicledata.arff");
 	}
 
 }
